@@ -6,6 +6,7 @@ Rathang Pandit
 
                                                               Week 2 Report 
 
+**The testing of the code was commited in the main directory
 
 Link to repository 
 https://github.com/Crazyduderik/sfsu-csc-667-fall-2024-roberts-term-project-battleshippers
