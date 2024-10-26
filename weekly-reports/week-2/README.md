@@ -95,7 +95,7 @@ We decided to keep ships in memory, because everytime a player has his turn to c
 Each ship will share the following characteristics: each ship will have a ship id, a string for the ship name, the start positionX in the X-coordinate system and the start positionY in the Y-coordinate system. The X and Y int represents the start position of each ship. Each ship will also have an orientation, which will be vertical or horizontal.  The boolean isSunk will show the status of the ship if the ship has sunk or hasn’t. Each ship will also have a length, and the number of hits it has received. The ship’s hits and sunk status is calculated based on the fact that if the ship is hit at the (X,Y) position and anywhere between that point to the position between (X + length or Y + length) depending on the orientation of the ship vertical or horizontal. If the number of hits is equal to the length, the ship’s status is considered to be sunk and all this is possible by ensuring that the same position can’t be targeted again.  
 
 
-Real-Time Chat: (I am not sure here if we need the id stuff since it’s a real-time chat)?
+Real-Time Chat:
  	In memory we have real-time chats similar to zoom. The benefit of this is messages can be handled by clients and the server forgets all. The real-time chat is obviously going to be handled by each player having their designated player-id and each message having a unique message-id.
 
 
