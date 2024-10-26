@@ -3,7 +3,7 @@
 
 ## Team Members
 
-- Student 1
+- Erik Perez
 - Student 2
 - Student 3
 - Student 4
