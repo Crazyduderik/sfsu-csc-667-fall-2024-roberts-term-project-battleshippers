@@ -25,4 +25,5 @@ const config: webpack.Configuration = {
     },
 };
 
-export default config;
+export default config
+11
