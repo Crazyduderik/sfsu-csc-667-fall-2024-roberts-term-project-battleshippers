@@ -8,6 +8,7 @@ import livereload from "livereload";
 import connectLivereload from "connect-livereload";
 
 import rootRoutes from "./routes/root";
+import gameRoutes from "./routes/games";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.set("views", path.join(process.cwd(), "src", "server", "views"));
 app.set("view engine", "ejs");
 
 app.use("/", rootRoutes);
+app.use("/games", gameRoutes);
 
 app.use((_request, _response, next) => {
   next(httpErrors(404));
