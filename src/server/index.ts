@@ -7,8 +7,11 @@ import * as path from "path";
 import livereload from "livereload";
 import connectLivereload from "connect-livereload";
 
+
+//import authRoutes from "./routes/auth";
 import rootRoutes from "./routes/root";
 import gameRoutes from "./routes/games";
+
 
 dotenv.config();
 
@@ -34,6 +37,7 @@ app.set("views", path.join(process.cwd(), "src", "server", "views"));
 app.set("view engine", "ejs");
 
 app.use("/", rootRoutes);
+app.use("/auth",authRoutes);
 app.use("/games", gameRoutes);
 
 app.use((_request, _response, next) => {
