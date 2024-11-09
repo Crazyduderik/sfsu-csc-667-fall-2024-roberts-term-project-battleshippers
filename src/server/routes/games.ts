@@ -2,6 +2,11 @@ import express from "express";
 
 const router = express.Router();
 
+// Default games/ will redirect to landing page
+router.get("/", (req, res) => {
+  res.redirect("/");
+});
+
 router.get("/:id", (request, response) => {
   const { id } = request.params;
 
