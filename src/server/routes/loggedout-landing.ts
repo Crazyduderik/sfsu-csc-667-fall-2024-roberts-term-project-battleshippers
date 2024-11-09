@@ -1,8 +1,8 @@
 import express from "express";
-const loggedout_landingRoutes = express.Router();
+const loggedin_landingRoutes = express.Router();
 
-loggedout_landingRoutes.get("/", (req, res) => {
-  res.send("Logged Out Landing Route");
+loggedin_landingRoutes.get("/", (req, res) => {
+  res.render("loggedout-landing", { title: "LOGGGOUT" });
 });
 
-export default loggedout_landingRoutes;
+export default loggedin_landingRoutes;

@@ -3,20 +3,26 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Login_Page</title>
+        <title>Registration_Page</title>
     </head>
   <body>
-    <h1>Login Page</h1>
-    <form action="/login" method="POST">
-        <div class="loginInfo">
+    <h1>Registration Page</h1>
+    <form action="/register" method="POST">
+        <div class="userInfo">
           <label>Username</label>
           <input type="text" name="username" required />
         </div>
+        <div class="email">
+            <label>Email</label>
+            <input type="text" name="email" required />
+          </div>
         <div class="passwordInfo">
           <label>Password</label>
           <input type="password" name="password" required />
+          <label>Confirm Password</label>
+          <input type="password" name="password2" required />
         </div>
-        <button type="submit" class="button">Login</button>
+        <button type="submit" class="button">Register</button>
       </form>
   </body>
 </html>
