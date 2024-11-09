@@ -10,6 +10,8 @@ import connectLivereload from "connect-livereload";
 import authRoutes from "./routes/auth";
 import rootRoutes from "./routes/root";
 import gameRoutes from "./routes/games";
+import loggedin_landingRoutes from "./routes/loggedin-landing";
+import loggedout_landingRoutes from "./routes/loggedout-landing";
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.set("view engine", "ejs");
 app.use("/", rootRoutes);
 app.use("/auth", authRoutes);
 app.use("/games", gameRoutes);
+app.use("/loggedin-landing", loggedin_landingRoutes);
+app.use("/loggedout-landing", loggedout_landingRoutes);
 
 app.use((_request, _response, next) => {
   next(httpErrors(404));
