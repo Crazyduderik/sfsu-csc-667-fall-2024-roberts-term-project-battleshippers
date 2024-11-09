@@ -7,22 +7,20 @@ import * as path from "path";
 import livereload from "livereload";
 import connectLivereload from "connect-livereload";
 
-
-//import authRoutes from "./routes/auth";
+import authRoutes from "./routes/auth";
 import rootRoutes from "./routes/root";
 import gameRoutes from "./routes/games";
-
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-if(process.env.NODE_ENV === "development"){
+if (process.env.NODE_ENV === "development") {
   const reloadServer = livereload.createServer();
   reloadServer.watch(path.join(process.cwd(), "src", "public"));
-  reloadServer.server.once("connection", () =>{
-    setTimeout(() =>{
+  reloadServer.server.once("connection", () => {
+    setTimeout(() => {
       reloadServer.refresh("/");
     }, 100);
   });
@@ -37,7 +35,7 @@ app.set("views", path.join(process.cwd(), "src", "server", "views"));
 app.set("view engine", "ejs");
 
 app.use("/", rootRoutes);
-app.use("/auth",authRoutes);
+app.use("/auth", authRoutes);
 app.use("/games", gameRoutes);
 
 app.use((_request, _response, next) => {
