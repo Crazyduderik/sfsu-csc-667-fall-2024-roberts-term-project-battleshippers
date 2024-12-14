@@ -5,6 +5,9 @@
     "start:dev": "concurrently --names server,frontend -c blue,green \"npm run server:dev\" \"npm run build:dev\"",
     "server:dev": "nodemon --exec ts-node src/server/index.ts --ext js,css,ejs --ignore src/public/js",
     "prepare": "husky",
+    "db:create": "node-pg-migrate create -j ts --",
+    "db:migrate": "ts-node node_modules/node-pg-migrate/bin/node-pg-migrate.js up -j ts",
+    "db:rollback": "ts-node node_modules/node-pg-migrate/node-pg-migrate/bin/node-pg-migrate.js down -j ts",
     "build": "webpack build",
     "build:dev": "webpack build --mode development --watch"
   },
@@ -38,11 +41,15 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@types/pg-promise": "^0.0.28",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^5.0.1",
     "http-errors": "^2.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-pg-migrate": "^7.8.0",
+    "pg": "^8.13.1",
+    "pg-promise": "^11.10.1"
   }
 }
