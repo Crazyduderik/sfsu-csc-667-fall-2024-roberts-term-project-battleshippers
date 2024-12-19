@@ -3,17 +3,20 @@ import dotenv from "dotenv";
 import express from "express";
 import httpErrors from "http-errors";
 
+import * as configuration from "./config";
+import * as routes from "./routes";
+
 import morgan from "morgan";
 import * as path from "path";
 // might not need this anymore
 // import livereload from "livereload";
 // import connectLivereload from "connect-livereload";
 
-import authRoutes from "./routes/auth";
-import rootRoutes from "./routes/root";
-import gameRoutes from "./routes/games";
-import loggedin_landingRoutes from "./routes/loggedin-landing";
-import loggedout_landingRoutes from "./routes/loggedout-landing";
+// import authRoutes from "./routes/auth";
+// import rootRoutes from "./routes/root";
+// import gameRoutes from "./routes/games";
+// import loggedin_landingRoutes from "./routes/loggedin-landing";
+// import loggedout_landingRoutes from "./routes/loggedout-landing";
 
 dotenv.config();
 
@@ -32,6 +35,8 @@ const PORT = process.env.PORT || 3000;
 
 //   app.use(connectLivereload());
 // }
+const staticPath = path.join(process.cwd(), "src", "public");
+configuration.configureLiveReload(app, staticPath);
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(process.cwd(), "src", "public")));
@@ -39,11 +44,11 @@ app.use(cookieParser());
 app.set("views", path.join(process.cwd(), "src", "server", "views"));
 app.set("view engine", "ejs");
 
-app.use("/", rootRoutes);
-app.use("/auth", authRoutes);
-app.use("/games", gameRoutes);
-app.use("/loggedin-landing", loggedin_landingRoutes);
-app.use("/loggedout-landing", loggedout_landingRoutes);
+app.use("/", routes.root);
+app.use("/auth", routes.auth);
+app.use("/games", routes.games);
+app.use("/loggedin-landing", routes.loggedin);
+app.use("/loggedout-landing", routes.loggedout);
 
 app.use((_request, _response, next) => {
   next(httpErrors(404));
