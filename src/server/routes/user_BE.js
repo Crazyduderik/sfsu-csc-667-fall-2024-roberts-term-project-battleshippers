@@ -12,7 +12,7 @@ const router = express.Router();
 const connection = require("./db");
 
 //TODO: MIDDLEWARE IMPORTS
-const { IS_LOGGED_OUT, IS_LOGGED_IN } = require("./ReqAuth_BE");
+const { IS_LOGGED_OUT, IS_LOGGED_IN } = require("./reqAuth_BE");
 
 // Login
 // POST request
@@ -181,20 +181,16 @@ router.post("/change-password", async (req, res) => {
 
     const is_match = await bcrypt.compare(pass_current, user.password_hash);
     if (!is_match) {
-      return res
-        .status(400)
-        .json({
-          error: "Password is not a match! Please double-check your input.",
-        });
+      return res.status(400).json({
+        error: "Password is not a match! Please double-check your input.",
+      });
     }
 
     // Check if new password and confirm password match
     if (newPass !== confirmPass) {
-      return res
-        .status(400)
-        .json({
-          error: "New passwords do not match! Please double-check your input.",
-        });
+      return res.status(400).json({
+        error: "New passwords do not match! Please double-check your input.",
+      });
     }
 
     // Hash the new password
