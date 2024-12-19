@@ -2,10 +2,12 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import httpErrors from "http-errors";
+
 import morgan from "morgan";
 import * as path from "path";
-import livereload from "livereload";
-import connectLivereload from "connect-livereload";
+// might not need this anymore
+// import livereload from "livereload";
+// import connectLivereload from "connect-livereload";
 
 import authRoutes from "./routes/auth";
 import rootRoutes from "./routes/root";
@@ -17,18 +19,19 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+// moved this to config folder
 
-if (process.env.NODE_ENV === "development") {
-  const reloadServer = livereload.createServer();
-  reloadServer.watch(path.join(process.cwd(), "src", "public"));
-  reloadServer.server.once("connection", () => {
-    setTimeout(() => {
-      reloadServer.refresh("/");
-    }, 100);
-  });
+// if (process.env.NODE_ENV === "development") {
+//   const reloadServer = livereload.createServer();
+//   reloadServer.watch(path.join(process.cwd(), "src", "public"));
+//   reloadServer.server.once("connection", () => {
+//     setTimeout(() => {
+//       reloadServer.refresh("/");
+//     }, 100);
+//   });
 
-  app.use(connectLivereload());
-}
+//   app.use(connectLivereload());
+// }
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(process.cwd(), "src", "public")));
