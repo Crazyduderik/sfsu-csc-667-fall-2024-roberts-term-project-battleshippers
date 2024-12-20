@@ -51,6 +51,7 @@ app.use("/auth", routes.auth);
 app.use("/games", routes.games);
 app.use("/loggedin-landing", routes.loggedin);
 app.use("/loggedout-landing", routes.loggedout);
+app.use("/main-lobby", routes.mainLobby);
 
 app.use((_request, _response, next) => {
   next(httpErrors(404));
