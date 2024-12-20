@@ -1,5 +1,6 @@
-import pgp from "pg-promise";
+import pgPromise, { IDatabase, IMain } from 'pg-promise';
 
-const connection = pgp()(process.env.DATABASE_URL!);
+const pgp: IMain = pgPromise();
+const db: IDatabase<{}> = pgp('postgres://csc667user:csc667@localhost:5432/csc667db');
 
-export default connection;
+export default db;
