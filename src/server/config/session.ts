@@ -1,6 +1,6 @@
 import connectPgSimple from "connect-pg-simple";
 import type { Express, RequestHandler } from "express";
-// import flash from "express-flash";
+import flash from "express-flash";
 import session from "express-session";
 let sessionMiddleware: RequestHandler | undefined = undefined;
 export default (app: Express): RequestHandler | undefined => {

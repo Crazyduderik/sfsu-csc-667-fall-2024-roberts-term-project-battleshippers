@@ -1,4 +1,6 @@
 import express from "express";
+import { Users } from "../db";
+
 const authRoutes = express.Router();
 
 authRoutes.get("/", (req, res) => {
@@ -8,5 +10,8 @@ authRoutes.get("/", (req, res) => {
 authRoutes.get("/register", (req, res) => {
   res.render("register", { title: "battleshippers's site" });
 });
+
+
+authRoutes.post("")
 
 export default authRoutes;

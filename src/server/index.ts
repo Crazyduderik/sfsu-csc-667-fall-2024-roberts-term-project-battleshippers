@@ -38,6 +38,8 @@ const PORT = process.env.PORT || 3000;
 const staticPath = path.join(process.cwd(), "src", "public");
 configuration.configureLiveReload(app, staticPath);
 
+configuration.configureSession(app);
+
 app.use(morgan("dev"));
 app.use(express.static(path.join(process.cwd(), "src", "public")));
 app.use(cookieParser());
