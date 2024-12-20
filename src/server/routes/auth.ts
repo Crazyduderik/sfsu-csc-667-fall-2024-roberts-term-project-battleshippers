@@ -1,17 +1,54 @@
 import express from "express";
 import { Users } from "../db";
 
-const authRoutes = express.Router();
+const router = express.Router();
 
-authRoutes.get("/", (req, res) => {
-  res.render("login", { title: "battleshippers's site" });
+router.get("/register", (_request, response) => {
+  response.render("auth/register", { title: "Auth: Register" });
 });
 
-authRoutes.get("/register", (req, res) => {
-  res.render("register", { title: "battleshippers's site" });
+router.post("/register", async (request, response) => {
+  const { username, email, password } = request.body;
+
+  try {
+    const user = await Users.register(username, email, password);
+    // @ts-expect-error TODO: Define the session type for the user object
+    request.session.user = user;
+
+    response.redirect("/lobby");
+  } catch (error) {
+    console.error(error);
+
+    request.flash("error", "Failed to register user");
+    response.redirect("/auth/register");
+  }
 });
 
+router.get("/login", (_request, response) => {
+  response.render("auth/login", { title: "Auth: Logout" });
+});
 
-authRoutes.post("")
+router.post("/login", async (request, response) => {
+  const { email, password } = request.body;
 
-export default authRoutes;
+  try {
+    const user = await Users.login(email, password);
+    // @ts-expect-error TODO: Define the session type for the user object
+    request.session.user = user;
+
+    response.redirect("/lobby");
+  } catch (error) {
+    console.error(error);
+
+    request.flash("error", error as string);
+    response.redirect("/auth/login");
+  }
+});
+
+router.get("/logout", (request, response) => {
+  request.session.destroy(() => {
+    response.redirect("/");
+  });
+});
+
+export default router;

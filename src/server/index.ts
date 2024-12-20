@@ -46,11 +46,14 @@ app.use(cookieParser());
 app.set("views", path.join(process.cwd(), "src", "server", "views"));
 app.set("view engine", "ejs");
 
+app.use(middleware.chat);
+
 app.use("/", routes.root);
 app.use("/auth", routes.auth);
 app.use("/games", routes.games);
 app.use("/loggedin-landing", routes.loggedin);
 app.use("/loggedout-landing", routes.loggedout);
+app.use("/chat", middleware.authentication, routes.chat);
 
 app.use((_request, _response, next) => {
   next(httpErrors(404));
