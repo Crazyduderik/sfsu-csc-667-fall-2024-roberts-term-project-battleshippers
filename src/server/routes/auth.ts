@@ -11,7 +11,4 @@ authRoutes.get("/register", (req, res) => {
   res.render("register", { title: "battleshippers's site" });
 });
 
-
-authRoutes.post("")
-
 export default authRoutes;
