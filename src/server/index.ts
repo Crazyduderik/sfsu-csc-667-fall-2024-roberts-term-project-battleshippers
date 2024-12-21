@@ -1,5 +1,5 @@
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+//import dotenv from "dotenv";
 import express from "express";
 import httpErrors from "http-errors";
 
@@ -17,8 +17,37 @@ import * as path from "path";
 // import gameRoutes from "./routes/games";
 // import loggedin_landingRoutes from "./routes/loggedin-landing";
 // import loggedout_landingRoutes from "./routes/loggedout-landing";
-
+import pgPromise, { IDatabase, IMain } from "pg-promise";
+import * as dotenv from "dotenv";
 dotenv.config();
+
+require("dotenv").config();
+
+// Define the interface for the database configuration
+interface DbConfig {
+  host: string;
+  port: number;
+  user: string;
+  password: string;
+  database: string;
+  ssl: boolean;
+}
+
+// Load database configuration from environment variables
+const dbConfig: DbConfig = {
+  host: process.env.DB_HOST || "localhost",
+  port: parseInt(process.env.DB_PORT || "5432", 10),
+  user: process.env.DB_USER || "csc667user",
+  password: process.env.DB_PASSWORD || "csc667",
+  database: process.env.DB_NAME || "csc667db",
+  ssl: process.env.DB_SSL === "true",
+};
+
+// Initialize pg-promise
+const pgp: IMain = pgPromise();
+const db: IDatabase<{}> = pgp(dbConfig);
+
+export default db;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
