@@ -3,7 +3,12 @@ import { Users } from "../db";
 
 const authRoutes = express.Router();
 
-authRoutes.get("/", (req, res) => {
+//Default to the login page
+authRoutes.get("", (req, res) => {
+  res.redirect("login");
+});
+
+authRoutes.get("/login", (req, res) => {
   res.render("login", { title: "battleshippers's site" });
 });
 
