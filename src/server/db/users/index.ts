@@ -24,8 +24,10 @@ const login = async (email: string, clearTextPassword: string) => {
   const user = await findByEmail(email);
   const isValid = await bcrypt.compare(clearTextPassword, user.password);
   if (isValid) {
+    console.log("Password valid!");
     return user;
   } else {
+    console.log("Passwords do not match!");
     throw new Error("Invalid credentials provided");
   }
 };

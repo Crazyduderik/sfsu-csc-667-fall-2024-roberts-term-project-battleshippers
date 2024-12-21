@@ -5,7 +5,6 @@
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const mysql = require("mysql2/promise");
 const router = express.Router();
 
 //TODO: Verify this line
@@ -16,8 +15,7 @@ const { IS_LOGGED_OUT, IS_LOGGED_IN } = require("./reqAuth_BE");
 
 // Login
 // POST request
-router.post("/login", async (req, res) => {
-  //TODO: API VERIFY LOGGED OUT (can't login if already logged in)
+router.post("/login", IS_LOGGED_OUT, async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -69,8 +67,7 @@ router.post("/login", async (req, res) => {
 
 // Logout
 // POST request
-router.post("/logout", (req, res) => {
-  //TODO: Middleware to check if is actually logged in
+router.post("/logout", IS_LOGGED_IN, (req, res) => {
   if (req.session) {
     try {
       connection.execute(
@@ -92,8 +89,7 @@ router.post("/logout", (req, res) => {
 
 // Registration
 // POST request
-router.post("/register", async (req, res) => {
-  //TODO: HAVE API VERIFICATION THAT USER IS NOT LOGGED IN
+router.post("/register", IS_LOGGED_OUT, async (req, res) => {
   const { username, email, password, verify_password } = req.body;
 
   // Passwords must match
@@ -163,8 +159,7 @@ router.post("/register", async (req, res) => {
 /* ACCOUNT MANAGEMENT */
 
 // Change Password
-router.post("/change-password", async (req, res) => {
-  //TODO: Middleware to confirm if user is logged in, SUPER IMPORTANT SECURITY CONCERN IF A REQUEST CAN CHANGE ANYONES PASSWORD
+router.post("/change-password", IS_LOGGED_IN, async (req, res) => {
   const pass_new = req.body.pass_new;
   const pass_current = req.body.pass_current;
   const pass_confirm = req.body.pass_confirm;
